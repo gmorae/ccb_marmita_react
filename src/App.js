@@ -3,6 +3,7 @@ import Navbar from './navbar'
 import { ToastContainer, toast } from 'react-toastify';
 import api from "./services/api";
 import 'react-toastify/dist/ReactToastify.css';
+import { getUsers } from './services/get';
 
 class App extends React.Component {
   mostra() {
@@ -20,31 +21,47 @@ class App extends React.Component {
         qdt_marmita: "",
         entrega: "",
         endereco: "",
-      }
+      },
+      users: [],
+      totalMarmita: 300,
+      resto: ''
+    }
+  }
 
+  componentWillMount = async () => {
+    const get = await getUsers()
+    this.setState({ users: get.data })
+    var arrayTotal = this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0)
+    this.state.resto = arrayTotal
+
+    if (this.state.totalMarmita - this.state.resto === 0) {
+      toast.error('Não pode mais cadastrar, pois o número de pedidos foi exedido')
+      document.getElementById('buttonConfirm').classList.add('d-none')
+      document.getElementById('alert').classList.remove('d-none')
     }
   }
 
   up = async e => {
     e.preventDefault();
-
+    if (this.state.entrega === 'Retirada igreja') {
+      this.state.endereco = '-'
+    }
     const { name_user, endereco, qdt_marmita, entrega } = this.state;
     if (!name_user || !endereco || !qdt_marmita || !entrega) {
       toast.error("Preencha todos os dados para se cadastrar");
     } else {
       try {
         await api.post("/users", { name_user, endereco, qdt_marmita, entrega });
-        this.props.history.push('/');
-        toast.success("Cadastrado com sucesso, faça login para acessar sua conta");
+        toast.success("Cadastrado com sucesso");
+        setTimeout(() => {
+          window.location.reload()
+        }, 4500);
       } catch (err) {
         console.log(err);
         toast.error("Ocorreu um erro ao cadastrar o cliente.");
       }
     }
   };
-  onSend() {
-    console.log(this.state.name);
-  }
   render() {
     return (
       <div>
@@ -53,6 +70,10 @@ class App extends React.Component {
         <div className="container col-md-6 mx-auto">
           <form className="text-center mt-5" onSubmit={this.up}>
             <h2 className="mb-3">Cadastro de usuário</h2>
+            <div className="my-4 d-flex justify-content-around">
+              <h5><b>Total de marmitas: </b>{this.state.totalMarmita}</h5>
+              <h5><b>Restantes: </b>{this.state.totalMarmita - this.state.resto}</h5>
+            </div>
             <input type="text" id="nome" className="form-control mb-4" name="name" onInput={(e) => this.setState({ name: e.target.value })} onChange={e => this.setState({ name_user: e.target.value })} placeholder="Nome Completo" />
             <input type="text" id="marmita" className="form-control mb-4" placeholder="Quantidade de marmitas" onInput={(e) => this.setState({ qdt_marmita: e.target.value })} onChange={e => this.setState({ qdt_marmita: e.target.value })} />
             <div className="d-flex">
@@ -93,9 +114,11 @@ class App extends React.Component {
               </div>
             </div>
           </form>
-          <button type="button" data-toggle="modal" data-target="#basicExampleModal" class="btn btn-primary btn-md btn-block mt-2">Cadastrar</button>
+          <button type="button" id="buttonConfirm" data-toggle="modal" data-target="#basicExampleModal" class="btn btn-primary btn-md btn-block mt-2">Cadastrar</button>
+          <div id="alert" class="alert-danger alert mt-2 d-none">Não pode mais cadastrar, pois o número de pedidos foi exedido</div>
         </div>
       </div>
+
     )
   };
 }
