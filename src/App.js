@@ -32,7 +32,7 @@ class App extends React.Component {
     const get = await getUsers()
     this.setState({ users: get.data })
 
-    if (this.state.totalMarmita - this.state.resto === 0) {
+    if (this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0) === 300 || this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0) > 300) {
       toast.error('Não pode mais cadastrar, pois o número de pedidos foi exedido')
       document.getElementById('buttonConfirm').classList.add('d-none')
       document.getElementById('alert').classList.remove('d-none')
