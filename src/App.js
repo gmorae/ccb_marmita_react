@@ -31,8 +31,6 @@ class App extends React.Component {
   componentWillMount = async () => {
     const get = await getUsers()
     this.setState({ users: get.data })
-    var arrayTotal = this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0)
-    this.state.resto = arrayTotal
 
     if (this.state.totalMarmita - this.state.resto === 0) {
       toast.error('Não pode mais cadastrar, pois o número de pedidos foi exedido')
@@ -72,7 +70,7 @@ class App extends React.Component {
             <h2 className="mb-3">Cadastro de usuário</h2>
             <div className="my-4 d-flex justify-content-around">
               <h5><b>Total de marmitas: </b>{this.state.totalMarmita}</h5>
-              <h5><b>Restantes: </b>{this.state.totalMarmita - this.state.resto}</h5>
+              <h5><b>Restantes: </b>{this.state.totalMarmita - this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0)}</h5>
             </div>
             <input type="text" id="nome" className="form-control mb-4" name="name" onInput={(e) => this.setState({ name: e.target.value })} onChange={e => this.setState({ name_user: e.target.value })} placeholder="Nome Completo" />
             <input type="text" id="marmita" className="form-control mb-4" placeholder="Quantidade de marmitas" onInput={(e) => this.setState({ qdt_marmita: e.target.value })} onChange={e => this.setState({ qdt_marmita: e.target.value })} />
