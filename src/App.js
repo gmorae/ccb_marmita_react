@@ -87,33 +87,33 @@ class App extends React.Component {
 
             <input type="text" id="endereco" className="form-control my-4 d-none" name="endereco" onInput={(e) => this.setState({ endereco: e.target.value })} placeholder="Endereço Completo" onChange={e => this.setState({ endereco: e.target.value })} />
 
-            <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <div className="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Resumo do pedido</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Resumo do pedido</h5>
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body text-left">
+                  <div className="modal-body text-left">
                     <p><b>Nome Completo:</b> {this.state.name}</p>
                     <p><b>Quantidade de marmita:</b> {this.state.qdt_marmita ? this.state.qdt_marmita : '0'} unidades</p>
                     <p><b>Entrega:</b> {this.state.entrega}</p>
                     <p><b>Endereço:</b> {this.state.entrega === 'Entrega residêncial' ? this.state.endereco : '---------'}</p>
                     <p><b>Total:</b> R$ {this.state.entrega === 'Entrega residêncial' ? this.state.qdt_marmita * 15 + 2 : this.state.qdt_marmita * 15},00</p>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-outline-danger waves-effect" data-dismiss="modal">Alterar</button>
-                    <button type="submit" class="btn btn-sm btn-success">Confirmar</button>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-sm btn-outline-danger waves-effect" data-dismiss="modal">Alterar</button>
+                    <button type="submit" className="btn btn-sm btn-success">Confirmar</button>
                   </div>
                 </div>
               </div>
             </div>
           </form>
-          <button type="button" id="buttonConfirm" data-toggle="modal" data-target="#basicExampleModal" class="btn btn-primary btn-md btn-block mt-2">Cadastrar</button>
-          <div id="alert" class="alert-danger alert mt-2 d-none">Não pode mais cadastrar, pois o número de pedidos foi exedido</div>
+          <button type="button" id="buttonConfirm" data-toggle="modal" data-target="#basicExampleModal" className="btn btn-primary btn-md btn-block mt-2">Cadastrar</button>
+          <div id="alert" className="alert-danger alert mt-2 d-none">Não pode mais cadastrar, pois o número de pedidos foi exedido</div>
         </div>
       </div>
 
