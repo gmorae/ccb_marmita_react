@@ -69,7 +69,7 @@ class App extends React.Component {
           <form className="text-center mt-5" onSubmit={this.up}>
             <h2 className="mb-3">Cadastro de usuário</h2>
             <div className="my-4 d-flex justify-content-around">
-              <h5><b>Total de marmitas: </b>{this.state.totalMarmita}</h5>
+              <h5><b>Total de reservada: </b>{this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0)}</h5>
               <h5><b>Restantes: </b>{this.state.totalMarmita - this.state.users.reduce((total, valor) => total + valor.qdt_marmita * 1, 0)}</h5>
             </div>
             <input type="text" id="nome" className="form-control mb-4" name="name" onInput={(e) => this.setState({ name: e.target.value })} onChange={e => this.setState({ name_user: e.target.value })} placeholder="Nome Completo" />
