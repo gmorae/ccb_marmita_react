@@ -22,7 +22,10 @@ export default class navbar extends Component {
                                 <Link class="nav-link" to='/listEntrega'>Lista de entrega</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" to='/'>Relatótios</Link>
+                                <Link class="nav-link" to='/doacoes'>Doações</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link" to='/relatorio'>Relatótios</Link>
                             </li>
                         </ul>
                     </div>
