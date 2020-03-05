@@ -10,15 +10,17 @@ export default class List extends Component {
         this.state = {
             list: [],
             listEntregue: [],
-            id: Number
+            id: Number,
+            total: Number
         }
     }
 
     componentDidMount = async () => {
         const get = await getRetirada()
         const getOK = await getEntregue()
-        this.setState({ list: get.data })
+        this.setState({ list: get.data.data })
         this.setState({ listEntregue: getOK.data })
+        this.setState({ total: get.data.dados.totalMarmitas })
         this.state.listEntregue.forEach(element => {
             document.getElementById(`button${element.id_ok}`).classList.add('btn-success')
             document.getElementById(`button${element.id_ok}`).innerHTML = 'Entregue'
@@ -50,7 +52,7 @@ export default class List extends Component {
                 <Navbar />
                 <div className="container col-md-7 mx-auto">
                     <h2 className="mb-3 text-center mt-5">Lista de usuário</h2>
-                    <h4 className="my-5"><b>Total de encomendas:</b> {this.state.list.reduce((total, valor) => total + valor.qdt_marmita * 1, 0)} unidades</h4>
+                    <h4 className="my-5"><b>Total de encomendas:</b> {this.state.total} unidades</h4>
                     <div className="table-responsive text-nowrap">
                         <table className="table text-center">
                             <thead>

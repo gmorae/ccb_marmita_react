@@ -12,14 +12,16 @@ export default class ListEntrega extends Component {
         this.state = {
             list: [],
             listEntregue: [],
+            total: Number
         }
     }
     
     componentDidMount = async () => {
         const get = await getEntrega()
         const getOK = await getEntregueMoto()
-        this.setState({ list: get.data })
+        this.setState({ list: get.data.data })
         this.setState({ listEntregue: getOK.data })
+        this.setState({ total: get.data.dados.totalMamitas})
         this.state.listEntregue.forEach(element => {
             document.getElementById(`button${element.id_ok}`).classList.add('btn-success')
             document.getElementById(`button${element.id_ok}`).innerHTML = 'Entregue'

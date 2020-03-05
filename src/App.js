@@ -38,7 +38,7 @@ class App extends React.Component {
     this.setState({ users: get.data.dados })
     this.setState({ resto: get.data.dados.totalMarmitasAtual })
     this.setState({ reserva: get.data.dados.totalPedidos })
-    if (this.state.reserva === 0 || this.state.reserva >= 0) {
+    if (this.state.reserva === 0 || this.state.reserva <= 0) {
       toast.error('Não pode mais cadastrar, pois o número de pedidos foi exedido')
       document.getElementById('buttonConfirm').classList.add('d-none')
       document.getElementById('alert').classList.remove('d-none')
