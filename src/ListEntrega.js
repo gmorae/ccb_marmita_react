@@ -24,7 +24,6 @@ export default class ListEntrega extends Component {
         this.setState({ total: get.data.dados.totalMamitas })
         this.state.listEntregue.forEach(element => {
             document.getElementById(`button${element.id_ok}`).classList.add('btn-success')
-            document.getElementById(`button${element.id_ok}`).innerHTML = 'Entregue'
         });
     }
 

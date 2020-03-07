@@ -23,7 +23,6 @@ export default class List extends Component {
         this.setState({ total: get.data.dados.totalMarmitas })
         this.state.listEntregue.forEach(element => {
             document.getElementById(`button${element.id_ok}`).classList.add('btn-success')
-            document.getElementById(`button${element.id_ok}`).innerHTML = 'Entregue'
         });
     }
 
