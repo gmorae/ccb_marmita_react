@@ -53,7 +53,7 @@ export default class Relatorio extends Component {
                             </div>
                             <div className="d-flex mt-5 justify-content-end">
                                 <h5><b>TOTAL GERAL</b></h5>
-                                <h5 className="ml-2">{this.format(this.state.list.totalMarmitas + this.state.doacao)}</h5>
+                                <h5 className="ml-2">{this.format(this.state.list.totalMarmitas + +this.state.doacao)}</h5>
                             </div>
                         </div>
                     </div>
