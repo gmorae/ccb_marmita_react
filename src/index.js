@@ -5,6 +5,7 @@ import List from './List'
 import ListEntrega from './ListEntrega'
 import Relatorio from './Relatorio'
 import Doacao from './Doacao';
+import SortPerson from './sortPerson';
 
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
@@ -15,6 +16,8 @@ const Routers = (
         <Route path="/listEntrega" exact component={ListEntrega} />
         <Route path="/relatorio" exact component={Relatorio} />
         <Route path='/doacoes' exact component={Doacao} />
+        <Route path='/sorteio' exact component={SortPerson} />
+
     </Router>
 )
 ReactDOM.render(Routers, document.getElementById('root'));
